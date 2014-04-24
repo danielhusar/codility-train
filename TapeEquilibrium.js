@@ -1,10 +1,15 @@
 function solution(a) {
-    var diff = -1;
-    for(var i = 0, length = a.length; i < length - 1; i++){
-        var leftSum = a.slice(0, i + 1).reduce(function(m,n){ return m + n}, 0);
-        var rightSum = a.slice(i + 1, length).reduce(function(m,n){ return m + n}, 0);
+    var index = 0;
+    var leftSum = a[index];
+    var rightSum = a.slice(1, length).reduce(function(m,n){ return m + n}, 0);
+    var diff = Math.abs(leftSum - rightSum);
+    var length = a.length - 2;
+    while(length--){
+        index++;
+        leftSum = leftSum + a[index];
+        rightSum = rightSum - a[index];
         var tempDiff = Math.abs(leftSum - rightSum);
-        if(tempDiff < diff || diff < 0){
+        if(tempDiff < diff){
             diff = tempDiff;
         }
     }
