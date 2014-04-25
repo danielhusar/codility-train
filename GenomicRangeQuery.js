@@ -1,7 +1,29 @@
 function solution(S, P, Q) {
     S = S.split('');
     var nucleotides = [];
-    var cache = {};
+    
+    for(var i = 0, length = P.length; i < length; i++){
+        var start = P[i];   
+        var end = Q[i];
+        var chunk = S.slice(start, end + 1);
+        if(chunk.indexOf('A') > -1){
+            nucleotides.push(1);
+        }else if(chunk.indexOf('C') > -1){
+            nucleotides.push(2);
+        }else if(chunk.indexOf('G') > -1){
+            nucleotides.push(3);
+        }else if(chunk[0]){
+            nucleotides.push(4);
+        }
+    }
+
+    return nucleotides;
+}
+
+/*
+function solution(S, P, Q) {
+    S = S.split('');
+    var nucleotides = [];
     var settings = {
         A: 1,
         C: 2,
@@ -12,16 +34,15 @@ function solution(S, P, Q) {
     for(var i = 0, length = P.length; i < length; i++){
         var start = P[i];   
         var end = Q[i];
-        var chunk = S.slice(start, end + 1);
-        var chunkString = chunk.join('');
-        cache[chunkString] = cache[chunkString] || chunk.filter(function (value, index, self) {
+        var chunk = S.slice(start, end + 1).filter(function (value, index, self) {
             return self.indexOf(value) === index;
         }).sort();
         
-        if(cache[chunkString].length){
-            nucleotides.push(settings[cache[chunkString][0]]);
+        if(chunk[0]){
+            nucleotides.push(settings[chunk[0]]);
         }
     }
 
     return nucleotides;
 }
+*/
